@@ -129,5 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# mac junk
+# others
 .DS_Store/
+package-lock.json
+.vscode
