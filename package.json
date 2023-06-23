@@ -1,0 +1,23 @@
+{
+  "name": "readme_generantis",
+  "version": "0.0.1",
+  "description": "A professional README.md file generator for your GitHub repos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MyComplex/non_jelly_salad_radar_mercantile_gurglets.git"
+  },
+  "author": "Jesus Santos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MyComplex/non_jelly_salad_radar_mercantile_gurglets/issues"
+  },
+  "homepage": "https://github.com/MyComplex/non_jelly_salad_radar_mercantile_gurglets#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "inquirer": "^8.2.4"
+  }
+}
