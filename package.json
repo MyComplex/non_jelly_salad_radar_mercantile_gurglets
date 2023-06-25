@@ -4,6 +4,7 @@
   "description": "A professional README.md file generator for your GitHub repos.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/MyComplex/non_jelly_salad_radar_mercantile_gurglets#readme",
   "dependencies": {
     "fs": "^0.0.1-security",
-    "inquirer": "^8.2.4"
+    "inquirer": "^8.2.4",
+    "node-fetch": "^2.6.11"
   }
 }
