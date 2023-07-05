@@ -2,7 +2,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const fetch = require('node-fetch');
-const { makeBadge, ValidationError } = require('badge-maker');
 
 /* FETCHING LICENSE TAGS FROM GITHUB */
 const licenseUrl = 'https://api.github.com/licenses';
@@ -49,10 +48,11 @@ fetch(licenseUrl)
                 default: 'TESTING README GENERATIS TESTING'
             },
             {
-                type: 'rawlist',
+                type: 'list',
                 name: 'license',
                 message: 'Choose the license your application will be released under.',
-                choices: licenseTypeArray
+                choices: licenseTypeArray,
+                loop: false
             },
             {
                 type: 'input',
@@ -65,28 +65,29 @@ fetch(licenseUrl)
                 name: 'email',
                 message: 'Enter your email address.',
                 default: "octocat@github.com"
-            },
+            }
         ];
 
         inquirer
             .prompt(questions)
             .then((answers) => {
 // Use user feedback for... whatever!!
-                for (let i = 0; i < data.length; i++) {
-                    const element = data[i];
-                    if (element.spdx_id === answers.license) {
-                        console.log(element.url);
-                        fetch(element.url)
-                            .then(license => license.json())
-                            .then(licData => {
-                                fs.writeFileSync('LICENSE', licData.body);
-                                let licFile = fs.readFileSync('LICENSE', 'utf-8');
-                                const yearAndName = `2023 ${answers.github}`;
-                                licFile = licFile.replace('[year] [fullname]', yearAndName);
-                                fs.writeFileSync('LICENSE', licFile);
-                            })
-                    }
-                }
+                fs.writeFileSync('README.md', `# ${answers.title}
+                
+                ![Static Badge](https://img.shields.io/badge/license-${answers.license}-green)
+
+                ## Description
+
+                ${answers.description}
+
+                ## Table of Contents
+
+                - [Installation] (#${answers.installation})
+                - [Usage] (#${answers.usage})
+                - [Contributing] (#${answers.contributing})
+                - [Testing] (#${answers.tests})
+                - [License] (#${answers.license})
+`);
             });
 
     })
