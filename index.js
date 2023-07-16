@@ -78,10 +78,27 @@ fetch(licenseUrl)
                 }
             ])
             .then((answers) => {
-                /* REPLACE HYPHENS WITH UNDERSCORES FOR SHIELDS.IO STATIC BADGE URL */
-                const badgeFriendlyLicenseUrl = encodeURI(`https://img.shields.io/badge/license-${answers.license.replace('-', '_')}-green`);
-                /* WRITE TO README.md FILE */
-                fs.writeFileSync('README.md', `
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    if (element.spdx_id === answers.license) {
+                        console.log(element.url);
+                        fetch(element.url)
+                            .then(license => license.json())
+                            .then(licData => {
+                                fs.writeFileSync('LICENSE', licData.body);
+                                let licFile = fs.readFileSync('LICENSE', 'utf-8');
+                                const licDate = new Date().getFullYear();
+                                const yearAndName = `${licDate} ${answers.github}`;
+                                licFile = licFile.replace('[year] [fullname]', yearAndName);
+                                fs.writeFileSync('LICENSE', licFile);
+                            })
+                    }
+                }
+            });
+        /* REPLACE HYPHENS WITH UNDERSCORES FOR SHIELDS.IO STATIC BADGE URL */
+        const badgeFriendlyLicenseUrl = encodeURI(`https://img.shields.io/badge/license-${answers.license.replace('-', '_')}-green`);
+        /* WRITE TO README.md FILE */
+        fs.writeFileSync('README.md', `
 # ${answers.title}
 
 ![Static Badge](${badgeFriendlyLicenseUrl})
@@ -126,9 +143,9 @@ ${answers.tests}
 
 If you have any questions, please feel free to reach out to me via [email](mailto:${answers.email}) or on [Github](https://github.com/${answers.github}/).
 `);
-            });
+    });
 
     })
-    .catch(err => {
-        console.log('An error occurred: ' + err);
-    });
+    .catch (err => {
+    console.log('An error occurred: ' + err);
+});
