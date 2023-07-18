@@ -11,6 +11,7 @@ This application takes input from the user and generates a professional README.m
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Watch](#watch)
 - [Contributing](#contributing)
 - [Testing](#testing)
 - [License](#license)
@@ -24,6 +25,10 @@ Clone the repository, change to the cloned application directory, and run "npm i
 ## Usage
 
 To use this application, enter "node index.js" in your terminal and hit the "Enter" key.
+
+## Watch
+
+[![Watch the video](https://i.imgur.com/jxbpQ6k.png)](https://youtu.be/6FA_W3bJGt4)
 
 ## License
 
