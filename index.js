@@ -88,14 +88,15 @@ fetch(licenseUrl)
                                 fs.writeFileSync('LICENSE', licData.body);
                                 let licFile = fs.readFileSync('LICENSE', 'utf-8');
                                 const licDate = new Date().getFullYear();
-                                const yearAndName = `${licDate} ${answers.github}`;
-                                licFile = licFile.replace('[year] [fullname]', yearAndName);
+                                // const yearAndName = `${licDate} ${answers.github}`;
+                                licFile = licFile.replace('[year]', licDate);
+                                licFile = licFile.replace('[fullname]', answers.github);
                                 fs.writeFileSync('LICENSE', licFile);
                             });
                     }
                 }
                 /* REPLACE HYPHENS WITH UNDERSCORES FOR SHIELDS.IO STATIC BADGE URL */
-                const badgeFriendlyLicenseUrl = encodeURI(`https://img.shields.io/badge/license-${answers.license.replace('-', '_')}-green`);
+                const badgeFriendlyLicenseUrl = encodeURI(`https://img.shields.io/badge/license-${answers.license.replaceAll('-', '_')}-green`);
                 /* WRITE TO README.md FILE */
                 fs.writeFileSync('README.md', `
 # ${answers.title}
@@ -108,11 +109,11 @@ ${answers.description}
 
 ## Table of Contents
 
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Contributing](#Contributing)
-- [Testing](#Testing)
-- [License](#License)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Testing](#testing)
+- [License](#license)
 
 ## Installation
 
